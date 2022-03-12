@@ -1,4 +1,5 @@
 import { useLayoutEffect, useMemo, useState } from 'react'
+import { BrowserRouter as Router } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client'
 import client from './config/apollo'
 import { ToastContainer } from 'react-toastify'
@@ -6,7 +7,7 @@ import { getToken } from './utils/token'
 import AuthContext from './context/AuthContext'
 
 import Auth from './pages/Auth'
-import Home from './pages/Home'
+import Navigation from './Routes/Navigation'
 
 export default function App() {
 
@@ -41,7 +42,7 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
         <AuthContext.Provider value={authData}>
-          {!isLoggedIn ? <Auth/> : <Home/>}
+          {!isLoggedIn ? <Auth/> : <Router><Navigation/></Router>}
           <ToastContainer 
             position="top-right"
             autoClose={5000}
